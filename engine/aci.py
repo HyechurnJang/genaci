@@ -32,7 +32,7 @@ class ACI:
         # filter non registered epg
         dn = obj['dn']
         print dn
-        kv = re.match('uni/tn-(?P<tn>[\W\w]+)/ap-(?P<ap>[\W\w]+)/epg-(?P<epg>[\W\w]+)', dn)
+        kv = re.match('uni/tn-(?P<tn>[\W\w]+)/ap-(?P<ap>[\W\w]+)/epg-(?P<epg>[\W\w]+)/.+$', dn)
         if not kv: return
         tn = kv.group('tn')
         ap = kv.group('ap')
