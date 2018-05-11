@@ -49,7 +49,7 @@ class ACI:
         self.genian.addHost(mac, ip)
     
     def addEPG(self, path):
-        if not re.search('^[\W\w]+/[\W\w]+/[\W\w]+'): raise Exception('invalid epg path')
+        if not re.search('^[\W\w]+/[\W\w]+/[\W\w]+', path): raise Exception('invalid epg path')
         self.epgs.append(path)
     
     def run(self):
