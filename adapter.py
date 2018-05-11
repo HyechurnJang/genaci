@@ -21,8 +21,9 @@ class Genian(Event):
     
     def filter(self, status, obj):
         if FILTER_EPG not in obj['dn']: return
-        print status
+        print 'ENDPOINT EVENT : %s' % status
         print json.dumps(obj, indent=2)
+        print ''
     
     def handle(self, status, obj):
         self.filter(status, obj)
