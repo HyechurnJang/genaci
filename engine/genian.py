@@ -24,8 +24,8 @@ class Genian:
     
     def addHost(self, mac, ip, sensornid='', genidev=0, do_not_delete_node=False):
         data = [{
-            'nl_ipstr' : mac,
-            'nl_mac' : ip,
+            'nl_ipstr' : ip,
+            'nl_mac' : mac,
             'nl_sensornid' : sensornid,
             'nl_genidev' : genidev,
             'doNotDeleteNode' : do_not_delete_node
