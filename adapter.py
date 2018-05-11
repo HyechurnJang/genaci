@@ -18,7 +18,7 @@ class Genian(Event):
     
     def handle(self, status, obj):
         print status
-        print obj
+        print json.dumps(obj, indent=2)
 
 ctrl.Endpoint.event(Genian())
 
