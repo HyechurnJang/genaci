@@ -39,5 +39,7 @@ class Genian:
             )
         except Exception as e: raise Exception('[ERROR] POST Request:%s' % str(e))
         if resp.status_code != 200: resp.raise_for_status()
-        try: return resp.json()
+        try:
+            print '[Genian] add host : %s/%s' % (mac, ip)
+            print json.dumps(resp.json(), indent=2)
         except: raise Exception('[ERROR] Response to Json:%s' % str(e))

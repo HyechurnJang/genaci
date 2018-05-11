@@ -23,24 +23,14 @@ class ACI:
         self.genian = Genian(genian_ip, genian_key)
     
     def __filter__(self, status, obj):
-        
-        print '%s %s' % (status, obj)
-        
         # filter deleted case
         if status == 'deleted': return
         
         # filter non registered epg
         dn = obj['dn']
-        print dn
         kv = re.match('uni/tn-(?P<tn>[\W\w]+)/ap-(?P<ap>[\W\w]+)/epg-(?P<epg>[\W\w]+)/.+$', dn)
         if not kv: return
-        tn = kv.group('tn')
-        ap = kv.group('ap')
-        epg = kv.group('epg')
-        path = '%s/%s/%s' % (tn, ap, epg)
-        
-        print path
-        
+        path = '%s/%s/%s' % (kv.group('tn'), kv.group('ap'), kv.group('epg'))
         if path not in self.epgs: return
         
         # filter uncompleted parameters
@@ -49,18 +39,12 @@ class ACI:
         mac = dn.split('/cep-')[1]
         ip = obj['ip']
         
-        print '%s / %s' % (mac, ip)
-        
         # filter ip 0.0.0.0
         if ip == '0.0.0.0': return
         
         # add host
-        
-        print 'try add host'
-        
+        print '[ACI] %s : %s/%s/%s' % (status, path, mac, ip)
         self.genian.addHost(mac, ip)
-        
-        print 'ok'
     
     def addEPG(self, path):
         if not re.search('^[\W\w]+/[\W\w]+/[\W\w]+', path): raise Exception('invalid epg path')
