@@ -7,7 +7,7 @@ Created on 2018. 5. 11.
 import json
 import requests
 
-TEST_IP = '192.168.2.'
+TEST_IP = '192.168.2.90'
 TEST_MAC = 'ab:cd:ef:ab:cd:ef'
 
 IP = '192.168.2.100'
