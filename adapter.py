@@ -15,7 +15,7 @@ APIC_DEBUG = True
 
 FILTER_EPG = 'tn-SDS-Tenant-01/ap-APP-01/epg-WAS'
 
-ctrl = Controller(APIC_IP, APIC_USERNAME, APIC_PASSWORD)
+ctrl = Controller(APIC_IP, APIC_USERNAME, APIC_PASSWORD, debug=APIC_DEBUG)
 
 class Genian(Event):
     
