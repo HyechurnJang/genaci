@@ -11,6 +11,7 @@ from acidipy import Controller, Event
 APIC_IP = '10.72.86.21'
 APIC_USERNAME = 'admin'
 APIC_PASSWORD = '1234Qwer'
+APIC_DEBUG = True
 
 FILTER_EPG = 'tn-SDS-Tenant-01/ap-APP-01/epg-WAS'
 
