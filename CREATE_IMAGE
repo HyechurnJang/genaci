@@ -1,0 +1,13 @@
+
+GET BASE_IMAGE from https://developer.cisco.com/site/aci/docs/app-center/getting-started/
+$ docker load -i BASE_IMAGE(=aci_appcenter_docker_image.tgz)
+$ docker run -d BASE_IMAGE_ID tail -f /dev/null
+$ docker exec -it CONTAINER_ID /bin/bash
+DOCKER # pip install -U pip
+DOCKER # pip uninstall acicobra
+DOCKER # pip uninstall acimodel
+DOCKER # pip uninstall acitoolkit
+DOCKER # pip install acidipy pygics jzlib
+DOCKER # exit
+$ docker commit CONTAINER_ID aci_appcenter_docker_image:latest
+$ docker save aci_appcenter_docker_image:latest | gzip -c > GeniNacTrigger/Image/aci_appcenter_docker_image.tgz
