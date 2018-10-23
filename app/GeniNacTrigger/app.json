@@ -13,6 +13,7 @@
         "contact-url":"https://github.com/HyechurnJang/genaci"
     },
     "iconfile":"aci_gen_logo.png",
+    "metaversion":"1.1",
     "name":"GeniNacTrigger",
     "permissions":[
         "admin"
