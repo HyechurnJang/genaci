@@ -13,20 +13,20 @@ window.addEventListener('message', function (e) {
 
 function getStatus() {
 	
-	var dev_token = Cookies.get("app_Ciscokr_GeniNacTrigger_token");
-	var url_token = Cookies.get("app_Ciscokr_GeniNacTrigger_urlToken");
+	var dev_token = window.APIC_DEV_COOKIE;
+	var url_token = window.APIC_URL_TOKEN;
 	
 	console.log("DEV_TOKEN : " + dev_token);
 	console.log("URL_TOKEN : " + url_token);
 	
     return $.ajax({
-        url: "/appcenter/Ciscokr/GeniNacTrigger/genaci.json",
+        url: document.location.origin + "/appcenter/Ciscokr/GeniNacTrigger/genaci.json",
         type: "GET",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         headers: {
             "DevCookie": dev_token,
-            "APIC-Challenge": url_token
+            "APIC-challenge": url_token
         },
         success: function(data) {
         	console.log(data);
