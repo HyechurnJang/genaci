@@ -1,5 +1,6 @@
 
 import re
+import sys
 import json
 from jzlib import setGlobals
 from pygics import rest
@@ -105,22 +106,25 @@ def get_status(req):
 @rest('POST', '/genaci.json')
 def set_config(req):
     data = req.data
-    print(json.dumps(data, indent=2))
-    
     error = []
     
     if 'genian' in data:
         genian = data['genian']
-        address = genian['address'].strip() if 'address' in genian else ''
-        passkey = genian['passkey'].strip() if 'passkey' in genian else ''
+        address = str(genian['address']).strip() if 'address' in genian else ''
+        passkey = str(genian['passkey']).strip() if 'passkey' in genian else ''
         if address and passkey:
             ret = __GENACI__.GENIAN.register(address, passkey)
             if ret: error.append(ret)
     
     if 'target_epg_list' in data:
         target_epg_list = data['target_epg_list']
-        if isinstance(target_epg_list, str): target_epg_list = [path.strip() for path in target_epg_list.split(',')]
-        elif isinstance(target_epg_list, list): target_epg_list = [path.strip() for path in target_epg_list]
+        if sys.version_info.major < 3:
+            if isinstance(target_epg_list, str): target_epg_list = [path.strip() for path in target_epg_list.split(',')]
+            elif isinstance(target_epg_list, unicode): target_epg_list = [path.strip() for path in str(target_epg_list).split(',')] 
+            elif isinstance(target_epg_list, list): target_epg_list = [str(path).strip() for path in target_epg_list]
+        else:
+            if isinstance(target_epg_list, str): target_epg_list = [path.strip() for path in target_epg_list.split(',')]
+            elif isinstance(target_epg_list, list): target_epg_list = [path.strip() for path in target_epg_list]
         for path in [path for path in target_epg_list]:
             if not re.search('^[\W\w]+/[\W\w]+/[\W\w]+', path): target_epg_list.remove(path)
         __GENACI__.TARGET_EPG_LIST = target_epg_list
@@ -128,9 +132,9 @@ def set_config(req):
     ret = None
     if 'apic' in data:
         apic = data['apic']
-        address = apic['address'].strip() if 'address' in apic else ''
-        username = apic['username'].strip() if 'username' in apic else ''
-        password = apic['password'].strip() if 'password' in apic else ''
+        address = str(apic['address']).strip() if 'address' in apic else ''
+        username = str(apic['username']).strip() if 'username' in apic else ''
+        password = str(apic['password']).strip() if 'password' in apic else ''
         if address and username and password:
             ret = __GENACI__.APIC.register(address, username, password)
             if ret: error.append(ret)
