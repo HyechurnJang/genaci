@@ -105,3 +105,4 @@ ENV/
 /.pydevproject
 /hello/
 /app/GeniNacTrigger/Image/aci_appcenter_docker_image.tgz
+/app/Ciscokr-GeniNacTrigger-*.aci
