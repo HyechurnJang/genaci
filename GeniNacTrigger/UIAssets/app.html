@@ -14,52 +14,75 @@
 	<script type="text/javascript" src="./static/js/genaci.js"></script>
 
     <div id="genaci-container">
-		<div id="genaci-container">
 
-			<div id="genaci-status">
-				<h1>Status of Genian NAC Trigger</h1>
-				<table style="text-align: left;">
-					<tbody>
-						<tr>
-							<th>Status</th>
-							<td id="total-status"></td>
-						</tr>
-						<tr>
-							<th>APIC Status</th>
-							<td id="apic-status"></td>
-						</tr>
-						<tr>
-							<th>Genian NAC Status</th>
-							<td id="genian-status"></td>
-						</tr>
-					</tbody>
-				</table>
+		<div id="genaci-status">
+			<h2>Status of Genian NAC Trigger</h2>
+			<table class="field-table">
+				<tbody>
+					<tr>
+						<th class="field-label">App Status</th>
+						<td id="total-status" class="field-value"></td>
+					</tr>
+					<tr>
+						<th class="field-label">APIC Status</th>
+						<td id="apic-status" class="field-value"></td>
+					</tr>
+					<tr>
+						<th class="field-label">Genian NAC Status</th>
+						<td id="genian-status" class="field-value"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div id="genaci-setup">
+			<h2 class="full-width">
+				Setup Genian NAC Trigger
+				<button id="genaci-submit">Save</button>
+			</h2>
+			<div id="target-epg-panel" class="full-width">
+				<label><strong>Target EPG</strong></label>
+				<input id="target-epg-list" type="text"/>
 			</div>
-
-			<div id="genaci-setup">
-				<h1>Setup Genian NAC Trigger</h1>
-				<form>
-					<table style="text-align: left;">
+			<div class="full-width">
+				<div class="component-panel">
+					<h3>APIC</h3>
+					<table class="component-table">
 						<tbody>
 							<tr>
-								<th>Status</th>
-								<td>stopped</td>
+								<th class="field-label">IP or Hostname</th>
+								<td class="field-value"><input id="apic-address" class="full-width" type="text"/></td>
 							</tr>
 							<tr>
-								<th>APIC Status</th>
-								<td>disconnected</td>
+								<th class="field-label">User Name</th>
+								<td class="field-value"><input id="apic-username" class="full-width" type="text"/></td>
 							</tr>
 							<tr>
-								<th>Genian NAC Status</th>
-								<td>disconnected</td>
+								<th class="field-label">Password</th>
+								<td class="field-value"><input id="apic-password" class="full-width" type="password"/></td>
 							</tr>
 						</tbody>
 					</table>
-				</form>
+				</div>
+				<div class="component-panel">
+					<h3>Genian NAC</h3>
+					<table class="component-table">
+						<tbody>
+							<tr>
+								<th class="field-label">IP or Hostname</th>
+								<td class="field-value"><input id="genian-address" class="full-width" type="text"/></td>
+							</tr>
+							<tr>
+								<th class="field-label">Passkey</th>
+								<td class="field-value"><input id="genian-passkey" class="full-width" type="password"/></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
-
 		</div>
-		
+
 	</div>
+		
 </body>
 </html>
