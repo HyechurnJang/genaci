@@ -1,51 +1,67 @@
 <!DOCTYPE html>
+<head>
 <meta charset="utf-8">
-
-<!-- Style -->
-<link rel="stylesheet" type="text/css" href="style.css">
-
-<!-- Import of Javascript files -->
-<!-- ext framework is available from the APIC -->
-<script type="text/javascript" src="/extjs/ext-all-debug.js"></script>
-
-<!-- Token management-->
-
-<!--
-  Get the tokens at first launch.
-
-  When the app is first launched, the tokens are contained is a cookies, named
-  app_VENDORDOMAIN_APPID_token and app_VENDORDOMAIN_APPID_urlToken.
-  In this case, we're using Ext to retrieve those tokens and put them into
-  window.APIC_DEV_COOKIE and window.APIC_URL_TOKEN.
--->
-<script type="text/javascript">
-  window.APIC_DEV_COOKIE = Ext.util.Cookies.get("app_Ciscokr_GeniNacTrigger_token");
-  window.APIC_URL_TOKEN =  Ext.util.Cookies.get("app_Ciscokr_GeniNacTrigger_urlToken");
-</script>
-
-<!-- 
-  Handle the refresh of the tokens.
-
-  This will automatically update window.APIC_DEV_COOKIE and window.APIC_URL_TOKEN
-  when the APIC sends new tokens to the application.
--->
-<script type="text/javascript">
-  window.addEventListener('message', function (e) {
-    if (e.source === window.parent) {
-        var tokenObj = Ext.decode(e.data, true);
-        if (tokenObj) {
-            window.APIC_DEV_COOKIE = tokenObj.token;
-            window.APIC_URL_TOKEN = tokenObj.urlToken;
-        }
-    }
-  });
-</script>
-
-<!-- Main logic / visualization -->
-
+	<title>EnhancedEndpointTracker</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script type="text/javascript" src="/extjs/ext-all-debug.js"></script>  
+</head>
 <body>
+	<script src="./static/js/jquery-2.2.4.min.js"></script>
+	<script src="./static/js/js.cookie.js"></script>
+	<script src="./static/js/genaci.js"></script>
+
     <div id="genaci-container">
-    Hello GenACI
-    </div>
+		<div id="genaci-container">
+
+			<div id="genaci-status">
+				<h1>Status of Genian NAC Trigger</h1>
+				<table style="text-align: left;">
+					<tbody>
+						<tr>
+							<th>Status</th>
+							<td id="total-status"></td>
+						</tr>
+						<tr>
+							<th>APIC Status</th>
+							<td id="apic-status"></td>
+						</tr>
+						<tr>
+							<th>Genian NAC Status</th>
+							<td id="genian-status"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div id="genaci-setup">
+				<h1>Setup Genian NAC Trigger</h1>
+				<form>
+					<table style="text-align: left;">
+						<tbody>
+							<tr>
+								<th>Status</th>
+								<td>stopped</td>
+							</tr>
+							<tr>
+								<th>APIC Status</th>
+								<td>disconnected</td>
+							</tr>
+							<tr>
+								<th>Genian NAC Status</th>
+								<td>disconnected</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
+
+		</div>
+		
+	</div>
 </body>
 </html>
