@@ -1,0 +1,25 @@
+{
+    "api":{
+        "getTenant.json":"Get tenant information"
+    },
+    "apicversion":"2.2(1a)",
+    "appid":"GeniNacTrigger",
+    "author":"Hyechurn Jang",
+    "category":[
+        "Visibility and Monitoring"
+    ],
+    "contact":{
+        "contact-email":"hyjang@cisco.com",
+        "contact-url":"https://github.com/HyechurnJang/genaci"
+    },
+    "iconfile":"aci_gen_logo.png",
+    "name":"GeniNacTrigger",
+    "permissions":[
+        "admin"
+    ],
+    "permissionslevel":"read",
+    "shortdescr":"ACI Endpoint Trigger for Genian NAC",
+    "vendor":"Ciscokr",
+    "vendordomain":"Ciscokr",
+    "version":"0.1"
+}

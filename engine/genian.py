@@ -22,7 +22,7 @@ class Genian:
             'Accept' : 'application/json'
         }
     
-    def addHost(self, mac, ip, sensornid='', genidev=0, do_not_delete_node=False):
+    def addHost(self, mac, ip, sensornid='', genidev=10, do_not_delete_node=False):
         data = [{
             'nl_ipstr' : ip,
             'nl_mac' : mac,
@@ -40,6 +40,6 @@ class Genian:
         except Exception as e: raise Exception('[ERROR] POST Request:%s' % str(e))
         if resp.status_code != 200: resp.raise_for_status()
         try:
-            print '[Genian] add host : %s/%s' % (mac, ip)
-            print json.dumps(resp.json(), indent=2)
+            print('[Genian] add host : %s/%s' % (mac, ip))
+            print(json.dumps(resp.json(), indent=2))
         except: raise Exception('[ERROR] Response to Json:%s' % str(e))
