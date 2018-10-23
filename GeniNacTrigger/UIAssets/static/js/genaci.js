@@ -43,7 +43,7 @@ function getStatus() {
 
 function setStatus() {
     $.ajax({
-        url: "/appcenter/Ciscokr/GeniNacTrigger/genaci.json",
+        url: document.location.origin + "/appcenter/Ciscokr/GeniNacTrigger/genaci.json",
         type: "POST",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -67,6 +67,9 @@ function setStatus() {
         	printStatus(data);
         },
         error: function(xhr, status, thrown) {
+        	console.log(xhr);
+        	console.log(status);
+        	console.log(thrown);
         	window.alert("error");
 		}
     });
