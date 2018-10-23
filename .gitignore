@@ -104,3 +104,4 @@ ENV/
 /.project
 /.pydevproject
 /hello/
+/app/GeniNacTrigger/Image/aci_appcenter_docker_image.tgz
