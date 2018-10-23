@@ -1,6 +1,6 @@
 {
     "api":{
-        "getTenant.json":"Get tenant information"
+        "genaci.json":"Interface of Status"
     },
     "apicversion":"2.2(1a)",
     "appid":"GeniNacTrigger",
@@ -23,5 +23,5 @@
     "shortdescr":"ACI Endpoint Trigger for Genian NAC",
     "vendor":"Ciscokr",
     "vendordomain":"Ciscokr",
-    "version":"0.2"
+    "version":"0.3"
 }
