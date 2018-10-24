@@ -12,36 +12,18 @@ window.addEventListener('message', function (e) {
 
 function printStatus(data) {
 	$("#app-status").html(data.status);
-	switch(data.status) {
-		"running":
-			$("#app-status-alert").attr("class", "alert alert-success");
-			break;
-		"Genian NAC is not ready":
-		"APIC is not ready":
-			$("#app-status-alert").attr("class", "alert alert-warning");
-			break;
-		"stopped":
-			$("#app-status-alert").attr("class", "alert alert-danger");
-			break;
-	}
+	if (data.status == "running") { $("#app-status-alert").attr("class", "alert alert-success"); }
+	else if (data.status == "Genian NAC is not ready") { $("#app-status-alert").attr("class", "alert alert-warning"); }
+	else if (data.status == "APIC is not ready") { $("#app-status-alert").attr("class", "alert alert-warning"); }
+	else { $("#app-status-alert").attr("class", "alert alert-danger"); }
+	
 	$("#apic-status").html(data.apic.status);
-	switch(data.apic.status) {
-		"connected":
-			$("#apic-status-alert").attr("class", "alert alert-success");
-			break;
-		"disconnected":
-			$("#apic-status-alert").attr("class", "alert alert-danger");
-			break;
-	}
+	if (data.apic.status == "connected") { $("#apic-status-alert").attr("class", "alert alert-success"); }
+	else { $("#apic-status-alert").attr("class", "alert alert-danger"); }
+	
 	$("#genian-status").html(data.genian.status);
-	switch(data.genian.status) {
-		"connected":
-			$("#genian-status-alert").attr("class", "alert alert-success");
-			break;
-		"disconnected":
-			$("#genian-status-alert").attr("class", "alert alert-danger");
-			break;
-	}
+	if (data.genian.status == "connected") { $("#genian-status-alert").attr("class", "alert alert-success"); }
+	else { $("#genian-status-alert").attr("class", "alert alert-danger"); }
 	
 	var target_epg_list_html = "";
 	for (i in data.target_epg_list) {
