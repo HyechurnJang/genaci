@@ -11,13 +11,49 @@ window.addEventListener('message', function (e) {
 });
 
 function printStatus(data) {
-	$("#total-status").html(data.status);
+	$("#app-status").html(data.status);
+	switch(data.status) {
+		"running":
+			$("#app-status-alert").attr("class", "alert alert-success");
+			break;
+		"Genian NAC is not ready":
+		"APIC is not ready":
+			$("#app-status-alert").attr("class", "alert alert-warning");
+			break;
+		"stopped":
+			$("#app-status-alert").attr("class", "alert alert-danger");
+			break;
+	}
 	$("#apic-status").html(data.apic.status);
+	switch(data.apic.status) {
+		"connected":
+			$("#apic-status-alert").attr("class", "alert alert-success");
+			break;
+		"disconnected":
+			$("#apic-status-alert").attr("class", "alert alert-danger");
+			break;
+	}
 	$("#genian-status").html(data.genian.status);
+	switch(data.genian.status) {
+		"connected":
+			$("#genian-status-alert").attr("class", "alert alert-success");
+			break;
+		"disconnected":
+			$("#genian-status-alert").attr("class", "alert alert-danger");
+			break;
+	}
+	
+	var target_epg_list_html = "";
+	for (i in data.target_epg_list) {
+		target_epg_list_html += '<li class="list-group-item">' + data.target_epg_list[i] + '</li>';
+	}
+	$("#apic-status-epg-list").html(target_epg_list_html);
 	$("#target-epg-list").val(data.target_epg_list.join(", "));
+	
 	$("#apic-address").val(data.apic.address);
 	$("#apic-username").val(data.apic.username);
 	$("#apic-password").val(data.apic.password);
+	
 	$("#genian-address").val(data.genian.address);
 	$("#genian-passkey").val(data.genian.passkey);
 }
@@ -75,7 +111,49 @@ function setStatus() {
     });
 }
 
+function getLogging() {
+	$.ajax({
+        url: document.location.origin + "/appcenter/Ciscokr/GeniNacTrigger/logging.json",
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: {
+            "DevCookie": window.APIC_DEV_COOKIE,
+            "APIC-challenge": window.APIC_URL_TOKEN
+        },
+        success: function(data) {
+        	$("#logging-text").html(data.join("<br/>"));
+        },
+        error: function(xhr, status, thrown) {
+			window.alert("error");
+		}
+    });
+}
+
+function delLogging() {
+	$.ajax({
+        url: document.location.origin + "/appcenter/Ciscokr/GeniNacTrigger/logging.json",
+        type: "DELETE",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        headers: {
+            "DevCookie": window.APIC_DEV_COOKIE,
+            "APIC-challenge": window.APIC_URL_TOKEN
+        },
+        success: function(data) {
+        	if (data.result == true) { window.alert("old log files are deleted"); }
+        	else { window.alert("deleting old log files failed"); }
+        },
+        error: function(xhr, status, thrown) {
+			window.alert("deleting old log files failed");
+		}
+    });
+}
+
 $(document).ready(function() {
 	$("#genaci-submit").click(function() { setStatus(); });
+	$("#logging-refresh").click(function() { getLogging(); });
+	$("#logging-delete").click(function() { delLogging(); });
 	getStatus();
+	getLogging();
 });

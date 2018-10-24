@@ -1,86 +1,161 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
+<html>
 
-<link rel="stylesheet" href="./static/css/genaci.css">
-<script type="text/javascript" src="./static/js/jquery-2.2.4.min.js"></script>
-<script type="text/javascript" src="./static/js/test.js"></script>
-
-<body>
-	<div id="genaci-container">
-
-
-
-
-		<div id="genaci-status">
-			<h2>Status of Genian NAC Trigger</h2>
-			<table class="field-table">
-				<tbody>
-					<tr>
-						<th class="field-label">App Status</th>
-						<td id="total-status" class="field-value"></td>
-					</tr>
-					<tr>
-						<th class="field-label">APIC Status</th>
-						<td id="apic-status" class="field-value"></td>
-					</tr>
-					<tr>
-						<th class="field-label">Genian NAC Status</th>
-						<td id="genian-status" class="field-value"></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-
-		<div id="genaci-setup">
-			<h2 class="full-width">
-				Setup Genian NAC Trigger
-				<button id="genaci-submit">Save</button>
-			</h2>
-			<div id="target-epg-panel" class="full-width">
-				<label><strong>Target EPG</strong></label>
-				<input id="target-epg-list" type="text"/>
+	<head>
+	
+		<title>GeniNacTrigger</title>
+		
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="ACI Endpoint Trigger for Genian NAC">
+		<meta name="author" content="hyjang@cisco.com">
+		
+		<link rel="stylesheet" href="./static/css/bootstrap.min.css">
+		<link rel="stylesheet" href="./static/css/style.css">
+		
+	</head>
+	
+	<body>
+	
+		<script type="text/javascript" src="/extjs/ext-all-debug.js"></script>
+		<script type="text/javascript" src="./static/js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="./static/js/popper.min.js"></script>
+		<script type="text/javascript" src="./static/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="./static/js/test.js"></script>
+		
+	    <div id="genaci-container">
+	    
+	    	<div class="container-fluid">
+	    	
+	    		<div id="status-alert-panel" class="row" style="margin-top:1rem;">
+	    			<div class="col-sm">
+	    				<div id="app-status-alert" class="alert alert-danger" role="alert"><strong>APP </strong><small id="app-status"></small></div>
+	    			</div>
+	    			<div class="col-sm">
+	    				<div id="apic-status-alert" class="alert alert-danger" role="alert"><strong>APIC </strong><small id="apic-status"></small></div>
+	    			</div>
+	    			<div class="col-sm">
+	    				<div id="genian-status-alert" class="alert alert-danger" role="alert"><strong>Genian </strong><small id="genian-status"></small></div>
+	    			</div>
+	    		</div>
+	    		
+	    		<div class="row">
+	    		
+	    			<div class="container-fluid">
+		    			<ul id="genaci-menu" class="nav nav-tabs" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" id="genaci-menu-status" data-toggle="tab" href="#genaci-status" role="tab" aria-controls="genaci-status" aria-selected="true">Status</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="genaci-menu-setting" data-toggle="tab" href="#genaci-setting" role="tab" aria-controls="genaci-setting" aria-selected="false">Setting</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="genaci-menu-logging" data-toggle="tab" href="#genaci-logging" role="tab" aria-controls="genaci-logging" aria-selected="false">Logging</a>
+							</li>
+						</ul>
+					</div>
+					
+					<div class="container-fluid">
+						<div id="genaci-content" class="tab-content">
+							<div class="tab-pane fade show active" id="genaci-status" role="tabpanel" aria-labelledby="genaci-menu-status">
+								<div class="row">
+									<div class="col-sm-5">
+										<div id="apic-status-panel" class="card">
+											<div class="card-body">
+												<ul id="apic-status-epg-list" class="list-group">
+												</ul>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-2" style="text-align:center;">
+										<img src="./static/image/right-arrow.png" style="width:100%;"/>
+									</div>
+									<div class="col-sm-5">
+										<div id="genian-status-panel" class="card">
+											<div class="card-body">
+												GENIAN INFO
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="genaci-setting" role="tabpanel" aria-labelledby="genaci-menu-setting">
+								<div class="row">
+									<div class="col-sm">
+										<div class="input-group mb-3">
+											<div class="input-group-prepend">
+												<span id="target-epg-list-label" class="input-group-text">Target EPG List</span>
+											</div>
+											<input id="target-epg-list" type="text" class="form-control" placeholder="TENANT1/APP1/EPG1, TENANT2/APP2/EPG2, ..." aria-label="Target EPG List" aria-describedby="target-epg-list-label">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm">
+										<div class="card">
+											<div class="card-body">
+												<h4 class="card-title">APIC</h4>
+												<div class="input-group mb-3">
+													<div class="input-group-prepend">
+														<span id="apic-address-label" class="input-group-text">IP or Hostname</span>
+													</div>
+													<input id="apic-address" type="text" class="form-control" placeholder="XXX.XXX.XXX.XXX" aria-label="APIC IP or Hostname" aria-describedby="apic-address-label">
+												</div>
+												<div class="input-group mb-3">
+													<div class="input-group-prepend">
+														<span id="apic-username-label" class="input-group-text">Username</span>
+													</div>
+													<input id="apic-username" type="text" class="form-control" placeholder="admin" aria-label="APIC Username" aria-describedby="apic-username-label">
+												</div>
+												<div class="input-group mb-3">
+													<div class="input-group-prepend">
+														<span id="apic-password-label" class="input-group-text">Password</span>
+													</div>
+													<input id="apic-password" type="password" class="form-control" aria-label="APIC Password" aria-describedby="apic-password-label">
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm">
+										<div class="card">
+											<div class="card-body">
+												<h4 class="card-title">Genian NAC</h4>
+												<div class="input-group mb-3">
+													<div class="input-group-prepend">
+														<span id="genian-address-label" class="input-group-text">IP or Hostname</span>
+													</div>
+													<input id="genian-address" type="text" class="form-control" placeholder="XXX.XXX.XXX.XXX" aria-label="Genian NAC IP or Hostname" aria-describedby="genian-address-label">
+												</div>
+												<div class="input-group mb-3">
+													<div class="input-group-prepend">
+														<span id="genian-passkey-label" class="input-group-text">Passkey</span>
+													</div>
+													<input id="genian-passkey" type="password" class="form-control" aria-label="Genian Passkey" aria-describedby="genian-password-label">
+												</div>
+											</div>
+										</div>
+										<button id="genaci-submit" type="button" class="btn btn-primary">Save</button>
+									</div>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="genaci-logging" role="tabpanel" aria-labelledby="genaci-menu-logging">
+								<div id="logging-panel" class="card">
+									<div class="card-body">
+										<div id="logging-text" class="card-text">asdf<br/>asdf</div>
+									</div>
+									<div class="card-footer text-muted" style="text-align:right;">
+										<div class="btn-group" role="group" aria-label="Basic example">
+											<button id="logging-refresh" type="button" class="btn btn-secondary">Delete Old Logs</button>
+											<button id="logging-delete" type="button" class="btn btn-primary">Refresh</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+	    		</div>
 			</div>
-			<div class="full-width">
-				<div class="component-panel">
-					<h3>APIC</h3>
-					<table class="component-table">
-						<tbody>
-							<tr>
-								<th class="field-label">IP or Hostname</th>
-								<td class="field-value"><input id="apic-address" class="full-width" type="text"/></td>
-							</tr>
-							<tr>
-								<th class="field-label">User Name</th>
-								<td class="field-value"><input id="apic-username" class="full-width" type="text"/></td>
-							</tr>
-							<tr>
-								<th class="field-label">Password</th>
-								<td class="field-value"><input id="apic-password" class="full-width" type="password"/></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="component-panel">
-					<h3>Genian NAC</h3>
-					<table class="component-table">
-						<tbody>
-							<tr>
-								<th class="field-label">IP or Hostname</th>
-								<td class="field-value"><input id="genian-address" class="full-width" type="text"/></td>
-							</tr>
-							<tr>
-								<th class="field-label">Passkey</th>
-								<td class="field-value"><input id="genian-passkey" class="full-width" type="password"/></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
 		</div>
-
-
-
-
-	</div>
-</body>
+	</body>
 </html>

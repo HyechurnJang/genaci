@@ -1,0 +1,30 @@
+#status-alert-panel {
+	margin-top: 1rem;
+}
+
+#genaci-menu {
+	width: 100%;
+	margin-bottom: 1.5em;
+}
+
+#genaci-content {
+	width: 100%;
+}
+
+#genaci-submit {
+	width: 100%;
+	margin-top: 1rem;
+}
+
+#logging-panel {
+	width: 100%;
+	height: calc(100vh - 11em);
+	background-color: black;
+	color: lime;
+}
+
+#logging-text {
+	width: 100%;
+	height: calc(100vh - 18em);
+	overflow: auto;
+}

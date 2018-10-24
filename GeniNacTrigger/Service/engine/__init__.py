@@ -1,7 +1,9 @@
 
+import os
 import re
 import sys
 import json
+import socket
 from jzlib import setGlobals
 from pygics import rest
 from .aci import ACI
@@ -11,6 +13,7 @@ class __GENACI__:
     
     TARGET_EPG_LIST = []
     STATUS = 'stopped'
+    HOSTNAME = socket.gethostname()
     
     class APIC:
         HANDLE = None
@@ -145,7 +148,28 @@ def set_config(req):
     if __GENACI__.APIC.HANDLE and __GENACI__.GENIAN.HANDLE: __GENACI__.STATUS = 'running'
     elif __GENACI__.APIC.HANDLE: __GENACI__.STATUS = 'Genian NAC is not ready'
     elif __GENACI__.GENIAN.HANDLE: __GENACI__.STATUS = 'APIC is not ready'
+    else: __GENACI__.STATUS = 'stopped'
     
     result = __GENACI__.toDict()
     if error: result['error'] = ', '.join(error)
     return result 
+
+@rest('GET', '/logging.json')
+def get_logging(req):
+    try:
+        with open('__pygics__/pygics.%s.log' % __GENACI__.HOSTNAME, 'r') as fd: logs = fd.readlines()
+    except: logs = ['Retriving Log Failed']
+    count = 0
+    max_count = 50
+    result = []
+    logs.reverse()
+    for log in logs:
+        result.insert(0, log.replace('\n', '').replace('<', '{').replace('>', '}'))
+        count += 1
+        if count > max_count: break
+    return result
+
+@rest('DELETE', '/logging.json')
+def del_logging(req):
+    if os.system('rm -rf __pygics__/pygics.%s.log.*' % __GENACI__.HOSTNAME): return {'result' : False}
+    else: return {'result' : True}
