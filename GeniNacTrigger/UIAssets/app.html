@@ -29,13 +29,13 @@
 	    	<div class="container-fluid">
 	    	
 	    		<div id="status-alert-panel" class="row" style="margin-top:1rem;">
-	    			<div class="col-sm">
+	    			<div class="col-sm-4">
 	    				<div id="apic-status-alert" class="alert alert-danger" role="alert"><strong>APIC </strong><small id="apic-status"></small></div>
 	    			</div>
-	    			<div class="col-sm">
+	    			<div class="col-sm-4">
 	    				<div id="app-status-alert" class="alert alert-danger" role="alert"><strong>APP </strong><small id="app-status"></small></div>
 	    			</div>
-	    			<div class="col-sm">
+	    			<div class="col-sm-4">
 	    				<div id="genian-status-alert" class="alert alert-danger" role="alert"><strong>Genian </strong><small id="genian-status"></small></div>
 	    			</div>
 	    		</div>
@@ -69,7 +69,7 @@
 										</div>
 									</div>
 									<div class="col-sm-2" style="text-align:center;">
-										<img src="./static/image/right-arrow.png" style="width:100%;"/>
+										<img src="./static/image/forward.png" style="width:100%;"/>
 									</div>
 									<div class="col-sm-5">
 										<div id="genian-status-panel" class="card">
@@ -85,9 +85,12 @@
 									<div class="col-sm">
 										<div class="input-group mb-3">
 											<div class="input-group-prepend">
-												<span id="target-epg-list-label" class="input-group-text">Target EPG List</span>
+												<span id="target-epg-list-label" class="input-group-text genaci-input-150px">Target EPG List</span>
 											</div>
 											<input id="target-epg-list" type="text" class="form-control" placeholder="TENANT1/APP1/EPG1, TENANT2/APP2/EPG2, ..." aria-label="Target EPG List" aria-describedby="target-epg-list-label">
+											<div class="input-group-append">
+												<button id="genaci-submit" type="button" class="btn btn-primary genaci-input-150px">Save</button>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -98,19 +101,13 @@
 												<h4 class="card-title">APIC</h4>
 												<div class="input-group mb-3">
 													<div class="input-group-prepend">
-														<span id="apic-address-label" class="input-group-text">IP or Hostname</span>
-													</div>
-													<input id="apic-address" type="text" class="form-control" placeholder="XXX.XXX.XXX.XXX" aria-label="APIC IP or Hostname" aria-describedby="apic-address-label">
-												</div>
-												<div class="input-group mb-3">
-													<div class="input-group-prepend">
-														<span id="apic-username-label" class="input-group-text">Username</span>
+														<span id="apic-username-label" class="input-group-text genaci-input-150px">Username</span>
 													</div>
 													<input id="apic-username" type="text" class="form-control" placeholder="admin" aria-label="APIC Username" aria-describedby="apic-username-label">
 												</div>
 												<div class="input-group mb-3">
 													<div class="input-group-prepend">
-														<span id="apic-password-label" class="input-group-text">Password</span>
+														<span id="apic-password-label" class="input-group-text genaci-input-150px">Password</span>
 													</div>
 													<input id="apic-password" type="password" class="form-control" aria-label="APIC Password" aria-describedby="apic-password-label">
 												</div>
@@ -123,19 +120,18 @@
 												<h4 class="card-title">Genian NAC</h4>
 												<div class="input-group mb-3">
 													<div class="input-group-prepend">
-														<span id="genian-address-label" class="input-group-text">IP or Hostname</span>
+														<span id="genian-address-label" class="input-group-text genaci-input-150px">IP or Hostname</span>
 													</div>
 													<input id="genian-address" type="text" class="form-control" placeholder="XXX.XXX.XXX.XXX" aria-label="Genian NAC IP or Hostname" aria-describedby="genian-address-label">
 												</div>
 												<div class="input-group mb-3">
 													<div class="input-group-prepend">
-														<span id="genian-passkey-label" class="input-group-text">Passkey</span>
+														<span id="genian-passkey-label" class="input-group-text genaci-input-150px">Passkey</span>
 													</div>
 													<input id="genian-passkey" type="password" class="form-control" aria-label="Genian Passkey" aria-describedby="genian-password-label">
 												</div>
 											</div>
 										</div>
-										<button id="genaci-submit" type="button" class="btn btn-primary">Save</button>
 									</div>
 								</div>
 							</div>

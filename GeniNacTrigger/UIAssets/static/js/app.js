@@ -68,7 +68,7 @@ function setStatus() {
         data: JSON.stringify({
     		target_epg_list: $("#target-epg-list").val(),
     		apic: {
-    			address: $("#apic-address").val(),
+    			address: document.location.host,
     			username: $("#apic-username").val(),
     			password: $("#apic-password").val()
     		},

@@ -11,9 +11,10 @@
 	width: 100%;
 }
 
-#genaci-submit {
-	width: 100%;
-	margin-top: 1rem;
+.genaci-input-150px {
+	width: 150px;
+	font-weight: bold;
+	text-align: center;
 }
 
 #logging-panel {

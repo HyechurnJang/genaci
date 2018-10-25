@@ -24,12 +24,11 @@ function getStatus() {
 	
 	$("#target-epg-list").val(merge_path);
 	
-	$("#apic-address").val("Test 4");
-	$("#apic-username").val("Test 5");
-	$("#apic-password").val("Test 6");
+	$("#apic-username").val("Test 4");
+	$("#apic-password").val("Test 5");
 	
-	$("#genian-address").val("Test 7");
-	$("#genian-passkey").val("Test 8");
+	$("#genian-address").val("Test 6");
+	$("#genian-passkey").val("Test 7");
 	
 	console.log($("#target-epg-list").val());
 }
