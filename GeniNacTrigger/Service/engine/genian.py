@@ -23,8 +23,8 @@ class Genian:
         }
         
         # To Fix Connection Check Procedure
-        try: resp = requests.get(self.url, headers=self.headers, timeout=2.0, verify=False)
-        except Exception as e:
+        try: resp = requests.get('https://%s:443/mc2/rest/sessions/current/?apiKey=%s' % (self.address, self.passkey), headers=self.headers, timeout=2.0, verify=False)
+        except:
             print('[Genian] ERROR : connect to Genian NAC(%s) with %s' % (address, passkey))
             raise
         if resp.status_code != 200:
